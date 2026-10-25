@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Touch AV — Smart Homes. Seamless Living.</title>
+<meta name="description" content="Professional custom AV integration in Santa Clarita, CA. Home theater, smart home control, lighting, audio, HVAC, and security systems.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #141820;
+    --bg-section: #1a1f2a;
+    --bg-card: #222835;
+    --accent: #d4ad4a;
+    --accent-dim: #b0912e;
+    --text: #f0eee9;
+    --text-muted: #a09b90;
+    --text-light: #d0ccc4;
+    --border: rgba(212,173,74,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(20,24,32,0.9);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 0.7rem 3rem; }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    letter-spacing: 2px; color: var(--accent);
+    text-decoration: none;
+  }
+  .logo span { color: var(--text-muted); font-weight: 400; font-size: 0.85rem; letter-spacing: 1px; margin-left: 0.5rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    position: relative; overflow: hidden;
+    padding: 2rem;
+    background:
+      linear-gradient(to bottom, rgba(20,24,32,0.55) 0%, rgba(20,24,32,0.7) 50%, rgba(20,24,32,0.85) 100%),
+      url('images/hero-background.jpg') center/cover no-repeat;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(201,164,74,0.02) 100px, rgba(201,164,74,0.02) 101px),
+      repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(201,164,74,0.02) 100px, rgba(201,164,74,0.02) 101px);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--border); border-radius: 50px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease-out;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease-out 0.1s both;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--accent);
+    display: inline-block;
+  }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--text-muted);
+    max-width: 550px; margin-bottom: 2.5rem;
+    font-weight: 300; letter-spacing: 0.5px;
+    animation: fadeUp 0.8s ease-out 0.25s both;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+    animation: fadeUp 0.8s ease-out 0.4s both;
+  }
+  .hero-tags span {
+    padding: 0.35rem 1rem; border: 1px solid var(--border);
+    border-radius: 4px; font-size: 0.72rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-light); font-weight: 500;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem;
+    animation: bounce 2s infinite;
+    color: var(--accent-dim); font-size: 0.7rem;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 3rem; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent);
+    font-weight: 600; margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--text-muted); font-size: 1.05rem;
+    max-width: 600px; font-weight: 300;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--bg-section); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .about-text p { color: var(--text-light); margin-bottom: 1.2rem; font-weight: 300; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .stat {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 6px;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-top: 0.3rem; font-weight: 500;
+  }
+  .about-image {
+    aspect-ratio: 4/5; border-radius: 8px;
+    overflow: hidden; position: relative;
+    border: 1px solid var(--border);
+  }
+  .about-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.9) saturate(0.95);
+    transition: transform 0.6s;
+  }
+  .about-image:hover img { transform: scale(1.03); }
+
+  /* ── SERVICES ── */
+  .services { max-width: 1200px; margin: 0 auto; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-dim);
+  }
+  .service-card-img {
+    width: 100%; height: 160px; object-fit: cover;
+    filter: brightness(0.7) saturate(0.85);
+    transition: filter 0.3s;
+  }
+  .service-card:hover .service-card-img {
+    filter: brightness(0.85) saturate(1);
+  }
+  .service-card-body {
+    padding: 2rem;
+  }
+  .service-icon {
+    width: 48px; height: 48px; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--accent-dim); border-radius: 50%;
+    color: var(--accent); font-size: 1.2rem;
+  }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .service-card p {
+    color: var(--text-muted); font-size: 0.9rem;
+    font-weight: 300; line-height: 1.7;
+  }
+  .service-card ul {
+    list-style: none; margin-top: 1rem;
+  }
+  .service-card ul li {
+    color: var(--text-light); font-size: 0.85rem;
+    padding: 0.3rem 0; font-weight: 300;
+    padding-left: 1rem; position: relative;
+  }
+  .service-card ul li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--accent-dim);
+  }
+
+  /* ── DAY IN LIFE ── */
+  .daylife { background: var(--bg-section); }
+  .daylife-container { max-width: 900px; margin: 0 auto; }
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute;
+    left: -3rem; top: 0.6rem;
+    width: 9px; height: 9px;
+    background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 12px rgba(201,164,74,0.3);
+    transform: translateX(-4px);
+  }
+  .timeline-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--accent);
+    font-weight: 700; margin-bottom: 0.2rem;
+  }
+  .timeline-title {
+    font-size: 1.15rem; font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-desc {
+    color: var(--text-muted); font-size: 0.9rem;
+    font-weight: 300; line-height: 1.8;
+  }
+
+  /* ── WHY US ── */
+  .whyus { max-width: 1100px; margin: 0 auto; }
+  .whyus-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .whyus-card {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .whyus-card:hover { border-color: var(--accent-dim); }
+  .whyus-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--accent); opacity: 0.4;
+    line-height: 1; flex-shrink: 0;
+  }
+  .whyus-card h3 {
+    font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .whyus-card p {
+    color: var(--text-muted); font-size: 0.88rem;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  /* ── BRANDS ── */
+  .brands {
+    background: var(--bg-section);
+    text-align: center;
+  }
+  .brand-logos {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 3rem;
+    max-width: 800px; margin: 0 auto;
+  }
+  .brand-logos span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--text-muted); letter-spacing: 1px;
+    opacity: 0.5; transition: opacity 0.3s;
+  }
+  .brand-logos span:hover { opacity: 1; color: var(--accent); }
+
+  /* ── CONTACT / CTA ── */
+  .cta {
+    text-align: center;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 80%, rgba(201,164,74,0.08) 0%, transparent 60%),
+      var(--bg-dark);
+  }
+  .cta .section-title { margin-left: auto; margin-right: auto; }
+  .cta .section-desc { margin-left: auto; margin-right: auto; }
+  .cta-details {
+    display: flex; justify-content: center; gap: 3rem;
+    flex-wrap: wrap; margin-bottom: 2rem;
+  }
+  .cta-item {
+    text-align: center;
+  }
+  .cta-item-label {
+    font-size: 0.7rem; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    font-weight: 600; margin-bottom: 0.3rem;
+  }
+  .cta-item-value {
+    font-size: 1.1rem; color: var(--text);
+    font-weight: 400;
+  }
+  .cta-item-value a {
+    color: var(--text); text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .cta-item-value a:hover { border-color: var(--accent); }
+  .cta-areas {
+    color: var(--text-muted); font-size: 0.85rem;
+    font-weight: 300; margin-top: 2.5rem;
+  }
+  .cta-license {
+    margin-top: 1rem; font-size: 0.75rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent-dim);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-image { max-height: 350px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .whyus-grid { grid-template-columns: 1fr; }
+    .cta-details { gap: 2rem; }
+    .hero h1 { font-size: 2.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">FINAL TOUCH AV <span>Santa Clarita, CA</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#lifestyle">Lifestyle</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Professional AV Integration</div>
+  <h1>Smart Homes.<br><em>Seamless Living.</em></h1>
+  <p class="hero-sub">Professional custom AV integration for discerning homeowners. Cinema-grade home theaters, intelligent automation, and systems that simply work.</p>
+  <div class="hero-tags">
+    <span>Home Theater</span>
+    <span>AV Control</span>
+    <span>Lighting</span>
+    <span>Whole-House Audio</span>
+    <span>HVAC</span>
+    <span>Security</span>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Engineered for the Way You Live</h2>
+      <p>Final Touch AV is a full-service custom AV integration company based in Santa Clarita, California. We design, install, and calibrate residential and commercial audiovisual systems with a level of precision born from decades in the industry.</p>
+      <p>Our founder's background includes Dolby Laboratories, THX/Lucasfilm, and the Academy of Motion Picture Arts and Sciences — where cinema-grade standards aren't aspirational, they're the baseline.</p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">25+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">C-7</div>
+          <div class="stat-label">Licensed Contractor</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">THX</div>
+          <div class="stat-label">Calibration Heritage</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">LA</div>
+          <div class="stat-label">Serving Greater LA</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image">
+      <img src="images/about-profile.jpg" alt="Professional home theater setup" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Services</div>
+  <h2 class="section-title">What We Do</h2>
+  <p class="section-desc">End-to-end residential and commercial AV solutions — designed, installed, and calibrated by professionals.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-home-theater.jpg" alt="Home theater with large screen" loading="lazy">
+      <div class="service-card-body">
+      <h3>Home Theater</h3>
+      <p>Cinema-grade experience in your home, engineered to reference standards.</p>
+      <ul>
+        <li>4K/8K laser projectors & displays</li>
+        <li>Dolby Atmos & DTS:X surround</li>
+        <li>ISF/THX-level calibration</li>
+        <li>Cinema masking systems</li>
+        <li>Kaleidescape movie servers</li>
+        <li>Acoustic treatment & design</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-av-control.jpg" alt="AV control system interface" loading="lazy">
+      <div class="service-card-body">
+      <h3>AV Control Systems</h3>
+      <p>One remote, one app — everything responds. Professional platforms for reliable whole-home control.</p>
+      <ul>
+        <li>Control4 & RTI systems</li>
+        <li>Home Assistant integration</li>
+        <li>Multi-room audio/video</li>
+        <li>One-touch scene control</li>
+        <li>Commercial AV installs</li>
+        <li>Custom rack-mount systems</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-lighting.jpg" alt="Room with ambient lighting control" loading="lazy">
+      <div class="service-card-body">
+      <h3>Lighting Control</h3>
+      <p>Scene-based room control, circadian scheduling, and perfect ambiance at every moment.</p>
+      <ul>
+        <li>Lutron & Philips Hue</li>
+        <li>"Movie Mode" — one tap</li>
+        <li>Circadian & scheduled lighting</li>
+        <li>Outdoor & landscape lighting</li>
+        <li>Smart dimmers & switches</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-audio.jpg" alt="Whole-house audio speaker system" loading="lazy">
+      <div class="service-card-body">
+      <h3>Whole-House Audio</h3>
+      <p>Music in every room, perfectly tuned and seamlessly controlled from one interface.</p>
+      <ul>
+        <li>Multi-zone distribution</li>
+        <li>Architectural speakers</li>
+        <li>Outdoor audio systems</li>
+        <li>Streaming integration</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-hvac.jpg" alt="Smart thermostat climate control" loading="lazy">
+      <div class="service-card-body">
+      <h3>HVAC Control</h3>
+      <p>Smart climate management tied to your lifestyle — comfort without thinking about it.</p>
+      <ul>
+        <li>Smart thermostat integration</li>
+        <li>Multi-zone climate control</li>
+        <li>Occupancy-based adjustment</li>
+        <li>Home/away/vacation modes</li>
+        <li>Energy savings automation</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img class="service-card-img" src="images/service-security.jpg" alt="Security camera system" loading="lazy">
+      <div class="service-card-body">
+      <h3>Security & Cameras</h3>
+      <p>See everything, control access, and rest easy — all from one interface.</p>
+      <ul>
+        <li>IP camera systems</li>
+        <li>Remote phone monitoring</li>
+        <li>Alarm system integration</li>
+        <li>Doorbell cameras & access</li>
+        <li>Recorded & live video</li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY IN THE LIFE -->
+<section class="daylife" id="lifestyle">
+  <div class="daylife-container">
+    <div class="section-label">Lifestyle</div>
+    <h2 class="section-title">A Day in the Life</h2>
+    <p class="section-desc">From the moment you wake up to the moment you fall asleep, your home works with you — not against you.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">7:00 AM — Good Morning</div>
+        <div class="timeline-title">Your day begins effortlessly</div>
+        <p class="timeline-desc">Shades rise, thermostat wakes to 70&deg;, a morning playlist starts softly, coffee maker turns on — all triggered by one tap or schedule.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Noon — Work from Home</div>
+        <div class="timeline-title">Focused and connected</div>
+        <p class="timeline-desc">Office lights shift to focused white light. Doorbell camera notifies your phone. All cameras accessible from your desk in one app.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">6:30 PM — Movie Night</div>
+        <div class="timeline-title">One tap. Cinema mode.</div>
+        <p class="timeline-desc">Lights dim to amber, projector powers on, Dolby Atmos kicks in, phone calls go to silent, HVAC adjusts — all from one button.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">10:00 PM — Good Night</div>
+        <div class="timeline-title">Everything powers down</div>
+        <p class="timeline-desc">All lights off, doors lock, alarm arms, thermostat drops to sleep temp, TVs and devices power down. One scene, total peace of mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus" id="why">
+  <div class="section-label">Why Professional Installation</div>
+  <h2 class="section-title">DIY Gets You Started.<br>We Get You Done Right.</h2>
+  <p class="section-desc">The difference between a smart home that frustrates and one that delights is in the details.</p>
+
+  <div class="whyus-grid">
+    <div class="whyus-card">
+      <div class="whyus-num">01</div>
+      <div>
+        <h3>It Just Works</h3>
+        <p>No dropped devices, no fighting your app, no "smart home, dumb problems." We engineer reliability from day one.</p>
+      </div>
+    </div>
+    <div class="whyus-card">
+      <div class="whyus-num">02</div>
+      <div>
+        <h3>One Interface</h3>
+        <p>Your Control4, RTI, or Home Assistant system ties everything together — one remote, one app, everything responds.</p>
+      </div>
+    </div>
+    <div class="whyus-card">
+      <div class="whyus-num">03</div>
+      <div>
+        <h3>Hidden Wiring</h3>
+        <p>Clean, professional installations. No visible wire runs. Racks are tidy and service-accessible.</p>
+      </div>
+    </div>
+    <div class="whyus-card">
+      <div class="whyus-num">04</div>
+      <div>
+        <h3>Expert Calibration</h3>
+        <p>Video and audio calibration with professional instruments — ISF-certified display calibration, Dolby-grade speaker tuning, and room correction for reference-quality results.</p>
+      </div>
+    </div>
+    <div class="whyus-card">
+      <div class="whyus-num">05</div>
+      <div>
+        <h3>Ongoing Support</h3>
+        <p>We don't install and disappear. Remote diagnostics, upgrades, and on-site service are part of what we do.</p>
+      </div>
+    </div>
+    <div class="whyus-card">
+      <div class="whyus-num">06</div>
+      <div>
+        <h3>Platform Matching</h3>
+        <p>We match the platform to your lifestyle, budget, and goals — not the other way around. Control4, RTI, Home Assistant, or AVA Remote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands">
+  <div class="section-label">Trusted Brands</div>
+  <h2 class="section-title">Premium Partners</h2>
+  <p class="section-desc" style="margin-left:auto;margin-right:auto;">We work with the best names in the industry to deliver systems that perform and last.</p>
+  <div class="brand-logos">
+    <span>Control4</span>
+    <span>RTI</span>
+    <span>Sony</span>
+    <span>Dolby</span>
+    <span>Lutron</span>
+    <span>Kaleidescape</span>
+    <span>Philips Hue</span>
+    <span>Home Assistant</span>
+    <span>AVA Remote</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="cta" id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Ready to Upgrade<br>Your Home?</h2>
+  <p class="section-desc" style="margin-left:auto;margin-right:auto;">Let's talk about what your home could do for you. Free consultations available.</p>
+
+  <div class="cta-details">
+    <div class="cta-item">
+      <div class="cta-item-label">Phone</div>
+      <div class="cta-item-value"><a href="tel:+18185685359">(818) 269-1427</a></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-label">Email</div>
+      <div class="cta-item-value"><a href="mailto:info@finaltouchav.com">info@finaltouchav.com</a></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-label">Location</div>
+      <div class="cta-item-value">Santa Clarita, CA</div>
+    </div>
+  </div>
+
+  <p class="cta-areas">Serving Santa Clarita Valley &middot; San Fernando Valley &middot; Los Angeles &middot; Ventura County</p>
+  <p class="cta-license">Final Touch AV &nbsp;|&nbsp; C-7 Licensed Contractor</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Final Touch AV. All rights reserved.
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+</body>
+</html>
